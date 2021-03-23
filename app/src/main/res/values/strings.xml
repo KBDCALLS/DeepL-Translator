@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Deepl Translator</string>
+    <string name="app_name">DeepL Translator</string>
+    <string name="copy_clipboard">The Text has been copied</string>
     <string name="double_back_to_exit">Please click back again to exit</string>
-    <string name="error_check">• Please check the data or Wi-Fi connection.</string>
-    <string name="error_reload">Reload</string>
-    <string name="error_title">Oh crumbs!</string>
+    <string name="network_err">Oops, failed to connect to DeepL server!</string>
 </resources>

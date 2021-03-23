@@ -8,13 +8,15 @@
     <application
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_rules"
-        android:requestLegacyExternalStorage="true"
+        android:supportsRtl="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
         <activity
             android:name=".MainActivity"
+            android:launchMode="singleTask"
+            android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait">
 
             <meta-data
@@ -27,5 +29,18 @@
             </intent-filter>
 
         </activity>
+
+        <activity
+            android:name=".FloatingTextSelection"
+            android:theme="@style/WhiteTheme">
+
+            <intent-filter>
+                <action android:name="android.intent.action.PROCESS_TEXT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain"/>
+            </intent-filter>
+
+        </activity>
+
     </application>
 </manifest>
