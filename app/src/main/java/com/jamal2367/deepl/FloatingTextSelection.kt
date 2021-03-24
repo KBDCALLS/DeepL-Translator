@@ -1,10 +1,10 @@
 package com.jamal2367.deepl
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 
-class FloatingTextSelection : AppCompatActivity() {
+class FloatingTextSelection : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
