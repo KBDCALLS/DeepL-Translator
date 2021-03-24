@@ -3,7 +3,9 @@ package com.jamal2367.deepl
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.os.*
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.KeyEvent
 import android.webkit.WebView
 import android.widget.Toast

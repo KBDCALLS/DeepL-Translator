@@ -1,6 +1,8 @@
 package com.jamal2367.deepl
 
-import android.content.*
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.webkit.JavascriptInterface
 import android.widget.Toast
 

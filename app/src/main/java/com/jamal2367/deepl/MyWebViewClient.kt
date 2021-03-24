@@ -3,7 +3,10 @@ package com.jamal2367.deepl
 import android.content.Intent
 import android.net.Uri
 import android.view.View
-import android.webkit.*
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.ImageButton
 
 class MyWebViewClient(
