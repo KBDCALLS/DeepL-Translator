@@ -12,7 +12,7 @@
         android:id="@+id/imageView2"
         android:layout_width="128dp"
         android:layout_height="128dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="24dp"
         android:contentDescription="@null"
         app:srcCompat="@drawable/ic_deepl" />
 
@@ -21,10 +21,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:layout_marginBottom="24dp"
-        android:layout_marginHorizontal="40dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginHorizontal="36dp"
         android:text="@string/network_err"
-        android:textSize="24sp" />
+        android:textSize="20sp" />
 
     <ImageButton
         android:id="@+id/reload"
