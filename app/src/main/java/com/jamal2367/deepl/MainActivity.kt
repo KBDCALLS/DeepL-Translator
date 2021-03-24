@@ -6,7 +6,7 @@ import android.content.Intent
 import android.os.*
 import android.view.KeyEvent
 import android.webkit.WebView
-import com.google.android.material.snackbar.Snackbar
+import android.widget.Toast
 
 class MainActivity : Activity() {
 
@@ -49,7 +49,7 @@ class MainActivity : Activity() {
         }
 
         this.doubleBackToExitPressedOnce = true
-        Snackbar.make(findViewById(android.R.id.content), R.string.double_back_to_exit, Snackbar.LENGTH_LONG).show()
+        Toast.makeText(this, R.string.double_back_to_exit, Toast.LENGTH_LONG).show()
         Handler(Looper.getMainLooper()).postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
         return true
     }
