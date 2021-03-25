@@ -31,10 +31,12 @@ class MyWebViewClient(
                         $('.dl_header_menu_v2__links__item').hide();
                         $('.dl_header_menu_v2__separator').hide();
                         $('.lmt__bottom_text--mobile').hide();
+                        $('.lmt__docTrans-tab-container').hide();
                         $('#dl_cookieBanner').hide();
                         $('.lmt__language_container_sec').hide();
                         $('.docTrans_translator_upload_button__inner_button').hide();
                         $('.lmt__target_toolbar__save').hide();
+                        $('.lmt__rating').hide();
                         $('footer').hide();
                         $('a').css('pointer-events','none');
                         $('.lmt__sides_container').css('margin-bottom','32px');
