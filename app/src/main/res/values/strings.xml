@@ -3,5 +3,9 @@
     <string name="app_name">DeepL Translator</string>
     <string name="copy_clipboard">The Text has been copied.</string>
     <string name="double_back_to_exit">Please click back again to exit.</string>
+    <string name="github_update_check_url" translatable="false">https://api.github.com/repos/jamal2362/Deepl-Translator/releases/latest</string>
     <string name="network_err">Oops, failed to connect to DeepL server!</string>
+    <string name="show">Show</string>
+    <string name="update_available">is available!</string>
+    <string name="url_app_home_page" translatable="false">https://github.com/jamal2362/Deepl-Translator/releases/latest</string>
 </resources>

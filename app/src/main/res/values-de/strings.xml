@@ -4,4 +4,6 @@
     <string name="copy_clipboard">Der Text wurde kopiert.</string>
     <string name="double_back_to_exit">Erneut zurück, um die App zu beenden.</string>
     <string name="network_err">Ups, die Verbindung zum DeepL Server ist fehlgeschlagen!</string>
+    <string name="show">Zeigen</string>
+    <string name="update_available">ist verfügbar!</string>
 </resources>
