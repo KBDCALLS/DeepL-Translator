@@ -68,4 +68,5 @@ class MyWebViewClient(
             activity.startActivity(i)
         }
     }
+
 }

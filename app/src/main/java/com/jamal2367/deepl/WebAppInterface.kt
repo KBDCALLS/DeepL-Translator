@@ -18,4 +18,5 @@ class WebAppInterface(
         clipboard.setPrimaryClip(clip)
         Snackbar.make(webView, context.getString(R.string.copy_clipboard), Snackbar.LENGTH_SHORT).show()
     }
+
 }

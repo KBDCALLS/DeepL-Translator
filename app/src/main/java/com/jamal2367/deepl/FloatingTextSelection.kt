@@ -24,4 +24,5 @@ class FloatingTextSelection : Activity() {
         super.finish()
         overridePendingTransition(0, 0)
     }
+
 }

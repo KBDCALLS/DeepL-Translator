@@ -81,6 +81,7 @@ class MainActivity : Activity() {
         queue.cancelAll(TAG)
         super.onDestroy()
     }
+
     /**
      * Check for update on github
      */
