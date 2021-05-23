@@ -51,7 +51,7 @@ class MainActivity : Activity() {
         webView.addJavascriptInterface(WebAppInterface(this, webView), "Android")
         webView.loadUrl("https://www.deepl.com/translator#en/en/$floatingText")
 
-        Handler(Looper.getMainLooper()).postDelayed({ checkForUpdates(this) }, 3000)
+        Handler(Looper.getMainLooper()).postDelayed({ checkForUpdates(this) }, 1000)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
