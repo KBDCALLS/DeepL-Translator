@@ -10,8 +10,8 @@ android {
         applicationId "com.jamal2367.deepl"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 18
-        versionName "1.8"
+        versionCode 19
+        versionName "1.9"
         resConfigs "en", "de"
         setProperty("archivesBaseName", 'Deepl-Translator_' + versionName)
     }
