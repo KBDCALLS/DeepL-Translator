@@ -24,6 +24,7 @@ class MainActivity : Activity() {
 
     private lateinit var webView: WebView
     private lateinit var queue: RequestQueue
+    private lateinit var webViewClient: MyWebViewClient
     private var doubleBackToExitPressedOnce = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,18 +40,18 @@ class MainActivity : Activity() {
         createWebView(intent)
     }
 
-    @SuppressLint("SetJavaScriptEnabled", "AddJavascriptInterface")
+
+    @SuppressLint("SetJavaScriptEnabled")
     private fun createWebView(intent: Intent?) {
         val floatingText = intent?.getStringExtra("FLOATING_TEXT") ?: ""
-
+        val defParamValue = "#en/en/"
+        val urlParam = getSharedPreferences("config", Context.MODE_PRIVATE).getString("urlParam", defParamValue) ?: defParamValue
         val webView: WebView = findViewById(R.id.WebView)
-        val webViewClient = MyWebViewClient(this, webView)
-
+        webViewClient = MyWebViewClient(this, webView)
         webView.settings.javaScriptEnabled = true
         webView.webViewClient = webViewClient
         webView.addJavascriptInterface(WebAppInterface(this, webView), "Android")
-        webView.loadUrl("https://www.deepl.com/translator#en/en/$floatingText")
-
+        webView.loadUrl("https://www.deepl.com/translator$urlParam$floatingText")
         Handler(Looper.getMainLooper()).postDelayed({ checkForUpdates(this) }, 1000)
     }
 
@@ -70,6 +71,14 @@ class MainActivity : Activity() {
         return true
     }
 
+    override fun onPause() {
+        super.onPause()
+        getSharedPreferences("config", Context.MODE_PRIVATE)
+            .edit()
+            .putString("urlParam", webViewClient.urlParam)
+            .apply()
+    }
+
     override fun onBackPressed() {
         when {
             webView.canGoBack() -> webView.goBack()
@@ -82,10 +91,6 @@ class MainActivity : Activity() {
         super.onDestroy()
     }
 
-    /**
-     * Check for update on github
-     */
-    @Suppress("NAME_SHADOWING")
     private fun checkForUpdates(context: Context) {
         val url = getString(R.string.github_update_check_url)
         val request = StringRequest(Request.Method.GET, url, { reply ->
@@ -95,9 +100,9 @@ class MainActivity : Activity() {
                 // We have an update available, tell our user about it
                 Snackbar.make(findViewById(R.id.WebView), getString(R.string.app_name) + " " + latestVersion + " " + getString(R.string.update_available), 10000)
                 .setAction(R.string.show) {
-                        val url = getString(R.string.url_app_home_page)
+                        val releaseurl = getString(R.string.url_app_home_page)
                         val i = Intent(Intent.ACTION_VIEW)
-                        i.data = Uri.parse(url)
+                        i.data = Uri.parse(releaseurl)
                         // Not sure that does anything
                         i.putExtra("SOURCE", "SELF")
                         startActivity(i)
@@ -106,7 +111,6 @@ class MainActivity : Activity() {
         }, { error ->
             Log.w(TAG, "Update check failed", error)
         })
-
         request.tag = TAG
         queue.add(request)
     }

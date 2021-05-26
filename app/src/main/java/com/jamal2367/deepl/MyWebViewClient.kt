@@ -9,10 +9,9 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ImageButton
 
-class MyWebViewClient(
-    private val activity: MainActivity,
-    private val webView: WebView
-) : WebViewClient() {
+class MyWebViewClient(private val activity: MainActivity, private val webView: WebView) : WebViewClient() {
+    private var param: String = ""
+    val urlParam: String get() = param
 
     override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
@@ -47,6 +46,7 @@ class MyWebViewClient(
                     """
         )
         webView.alpha = 1.0F
+        Regex("""#(.+?)/(.+?)/""").find(webView.url!!)?.let { param = it.value }
     }
 
     override fun onReceivedError(
