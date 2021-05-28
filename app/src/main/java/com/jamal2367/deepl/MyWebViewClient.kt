@@ -3,11 +3,10 @@ package com.jamal2367.deepl
 import android.content.Intent
 import android.net.Uri
 import android.view.View
-import android.webkit.WebResourceError
-import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ImageButton
+
 
 class MyWebViewClient(private val activity: MainActivity, private val webView: WebView) : WebViewClient() {
     private var param: String = ""
@@ -49,15 +48,15 @@ class MyWebViewClient(private val activity: MainActivity, private val webView: W
         Regex("""#(.+?)/(.+?)/""").find(webView.url!!)?.let { param = it.value }
     }
 
-    override fun onReceivedError(
-        view: WebView?,
-        request: WebResourceRequest,
-        error: WebResourceError?
-    ) {
-        activity.setContentView(R.layout.error_page)
-        val button: ImageButton = activity.findViewById(R.id.reload)
-        val listener = ReloadButtonListener()
-        button.setOnClickListener(listener)
+    override fun onReceivedError(view: WebView?, errorCode: Int, description: String?, failingUrl: String?) {
+        if (errorCode == ERROR_HOST_LOOKUP) {
+            activity.setContentView(R.layout.error_page)
+            val button: ImageButton = activity.findViewById(R.id.reload)
+            val listener = ReloadButtonListener()
+            button.setOnClickListener(listener)
+        } else {
+            return
+        }
     }
 
     private inner class ReloadButtonListener : View.OnClickListener {
