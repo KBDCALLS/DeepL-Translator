@@ -51,7 +51,7 @@ class MainActivity : Activity() {
         webView.settings.javaScriptEnabled = true
         webView.webViewClient = webViewClient
         webView.addJavascriptInterface(WebAppInterface(this, webView), "Android")
-        webView.loadUrl("https://www.deepl.com/translator$urlParam$floatingText")
+        webView.loadUrl("https://www.deepl.com/translator$urlParam${Uri.encode(floatingText)}")
         Handler(Looper.getMainLooper()).postDelayed({ checkForUpdates(this) }, 1000)
     }
 
