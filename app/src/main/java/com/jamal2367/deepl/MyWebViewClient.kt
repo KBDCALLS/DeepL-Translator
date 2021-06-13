@@ -2,10 +2,14 @@ package com.jamal2367.deepl
 
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.View
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ImageButton
+import com.google.android.material.snackbar.Snackbar
 
 
 class MyWebViewClient(private val activity: MainActivity, private val webView: WebView) : WebViewClient() {
@@ -48,14 +52,15 @@ class MyWebViewClient(private val activity: MainActivity, private val webView: W
         Regex("""#(.+?)/(.+?)/""").find(webView.url!!)?.let { param = it.value }
     }
 
-    override fun onReceivedError(view: WebView?, errorCode: Int, description: String?, failingUrl: String?) {
-        if (errorCode == ERROR_HOST_LOOKUP) {
+    override fun onReceivedError(view: WebView?, request: WebResourceRequest, error: WebResourceError?) {
+        if (request.isForMainFrame) {
             activity.setContentView(R.layout.error_page)
             val button: ImageButton = activity.findViewById(R.id.reload)
             val listener = ReloadButtonListener()
             button.setOnClickListener(listener)
-        } else {
-            return
+            val errorDescription = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) error?.description.toString() else ""
+            Snackbar.make(activity.findViewById(R.id.errText), errorDescription, Snackbar.LENGTH_LONG).show()
+            Log.e("onReceivedError", errorDescription)
         }
     }
 
