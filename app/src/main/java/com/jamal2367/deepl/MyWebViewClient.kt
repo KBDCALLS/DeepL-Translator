@@ -13,7 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 
 
 class MyWebViewClient(private val activity: MainActivity, private val webView: WebView) : WebViewClient() {
-    private var param: String = ""
+    private var param: String = "#en/en/"
     val urlParam: String get() = param
 
     override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
