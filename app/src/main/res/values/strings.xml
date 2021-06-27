@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">DeepL Translator</string>
+    <string name="cannot_open">File chooser cannot be opened.</string>
     <string name="copy_clipboard">The Text has been copied.</string>
     <string name="double_back_to_exit">Please click back again to exit.</string>
     <string name="github_update_check_url" translatable="false">https://api.github.com/repos/jamal2362/Deepl-Translator/releases/latest</string>

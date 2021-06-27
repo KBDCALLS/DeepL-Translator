@@ -10,6 +10,8 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.KeyEvent
+import android.webkit.ValueCallback
+import android.webkit.WebChromeClient
 import android.webkit.WebView
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -26,6 +28,11 @@ class MainActivity : Activity() {
     private lateinit var queue: RequestQueue
     private lateinit var webViewClient: MyWebViewClient
     private var doubleBackToExitPressedOnce = false
+    private var uploadMessage: ValueCallback<Array<Uri>>? = null
+
+    companion object {
+        private const val REQUEST_SELECT_FILE = 100
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +59,7 @@ class MainActivity : Activity() {
         webViewClient = MyWebViewClient(this, webView)
         webView.settings.javaScriptEnabled = true
         webView.webViewClient = webViewClient
+        webView.webChromeClient = MyWebChromeClient()
         webView.addJavascriptInterface(WebAppInterface(this, webView), "Android")
         webView.loadUrl("https://www.deepl.com/translator$urlParam${Uri.encode(receivedText)}")
         Handler(Looper.getMainLooper()).postDelayed({ checkForUpdates(this) }, 1000)
@@ -115,6 +123,49 @@ class MainActivity : Activity() {
         })
         request.tag = TAG
         queue.add(request)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            REQUEST_SELECT_FILE -> uploadMessage?.let { message ->
+                var result = WebChromeClient.FileChooserParams.parseResult(resultCode, data)
+                if (result == null) {
+                    result = if (intent.data != null) arrayOf(intent.data) else null
+                }
+                message.onReceiveValue(result)
+                uploadMessage = null
+            }
+        }
+    }
+
+    inner class MyWebChromeClient : WebChromeClient() {
+        override fun onShowFileChooser(
+            mWebView: WebView,
+            filePathCallback: ValueCallback<Array<Uri>>,
+            fileChooserParams: FileChooserParams
+        ): Boolean {
+            if (uploadMessage != null) {
+                uploadMessage?.onReceiveValue(null)
+                uploadMessage = null
+            }
+
+            uploadMessage = filePathCallback
+
+            val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+                type = "*/*"
+            }
+
+            try {
+                startActivityForResult(intent, REQUEST_SELECT_FILE)
+            } catch (e: Exception) {
+                uploadMessage = null
+                Snackbar.make(findViewById(R.id.WebView), R.string.cannot_open, Snackbar.LENGTH_LONG).show()
+                return false
+            }
+
+            return true
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">DeepL Übersetzer</string>
+    <string name="cannot_open">Dateiwähler kann nicht geöffnet werden.</string>
     <string name="copy_clipboard">Der Text wurde kopiert.</string>
     <string name="double_back_to_exit">Erneut zurück, um die App zu beenden.</string>
     <string name="network_err">Ups, die Verbindung zum DeepL Server ist fehlgeschlagen!</string>
