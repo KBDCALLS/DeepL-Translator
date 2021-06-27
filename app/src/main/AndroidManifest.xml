@@ -8,16 +8,16 @@
     <application
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_rules"
-        android:supportsRtl="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTask"
             android:configChanges="orientation|screenSize"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTask">
 
             <meta-data
                 android:name="android.webkit.WebView.MetricsOptOut"
@@ -38,8 +38,8 @@
 
         <activity
             android:name=".FloatingTextSelection"
-            android:theme="@style/WhiteTheme"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/WhiteTheme">
 
             <intent-filter>
                 <action android:name="android.intent.action.PROCESS_TEXT" />
