@@ -13,7 +13,7 @@ android {
         versionCode 23
         versionName "2.3"
         resConfigs "en", "de"
-        setProperty("archivesBaseName", 'Deepl-Translator_' + versionName)
+        setProperty("archivesBaseName", 'DeepL-Translator_' + versionName)
     }
 
     buildTypes {
