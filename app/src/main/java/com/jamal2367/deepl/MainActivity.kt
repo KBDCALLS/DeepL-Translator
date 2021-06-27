@@ -43,7 +43,9 @@ class MainActivity : Activity() {
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun createWebView(intent: Intent?) {
-        val floatingText = intent?.getStringExtra("FLOATING_TEXT") ?: ""
+        val floatingText = intent?.getStringExtra("FLOATING_TEXT")
+        val shareText = intent?.getStringExtra(Intent.EXTRA_TEXT)
+        val receivedText = floatingText ?: (shareText ?: "")
         val defParamValue = "#en/en/"
         val urlParam = getSharedPreferences("config", Context.MODE_PRIVATE).getString("urlParam", defParamValue) ?: defParamValue
         val webView: WebView = findViewById(R.id.WebView)
@@ -51,7 +53,7 @@ class MainActivity : Activity() {
         webView.settings.javaScriptEnabled = true
         webView.webViewClient = webViewClient
         webView.addJavascriptInterface(WebAppInterface(this, webView), "Android")
-        webView.loadUrl("https://www.deepl.com/translator$urlParam${Uri.encode(floatingText)}")
+        webView.loadUrl("https://www.deepl.com/translator$urlParam${Uri.encode(receivedText)}")
         Handler(Looper.getMainLooper()).postDelayed({ checkForUpdates(this) }, 1000)
     }
 
