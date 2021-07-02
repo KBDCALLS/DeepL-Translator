@@ -33,6 +33,7 @@ class MyWebViewClient(private val activity: MainActivity, private val webView: W
                         $('.dl_header_menu_v2__links').children().not('#dl_menu_translator_simplified').hide();
                         $('.dl_header_menu_v2__separator').hide();
                         $('.lmt__bottom_text--mobile').hide();
+                        $('.lmt__formalitySwitch__smaller__select_toggler').hide();
                         $('#dl_cookieBanner').hide();
                         $('.lmt__language_container_sec').hide();
                         $('.lmt__target_toolbar__save').hide();
