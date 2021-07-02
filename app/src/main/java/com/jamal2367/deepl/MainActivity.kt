@@ -58,6 +58,7 @@ class MainActivity : Activity() {
         val webView: WebView = findViewById(R.id.WebView)
         webViewClient = MyWebViewClient(this, webView)
         webView.settings.javaScriptEnabled = true
+        webView.settings.domStorageEnabled = true
         webView.webViewClient = webViewClient
         webView.webChromeClient = MyWebChromeClient()
         webView.addJavascriptInterface(WebAppInterface(this, webView), "Android")
