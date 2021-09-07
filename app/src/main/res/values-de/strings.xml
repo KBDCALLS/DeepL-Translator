@@ -7,4 +7,14 @@
     <string name="network_err">Ups, die Verbindung zum DeepL Server ist fehlgeschlagen!</string>
     <string name="show">Zeigen</string>
     <string name="update_available">ist verfügbar!</string>
+
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="themeSettings">Allgemein</string>
+    <string name="theme">App-Design</string>
+    <string name="theme_light">Helles Design</string>
+    <string name="theme_dark">Dunkles Design</string>
+    <string name="theme_battery">Set by Battery Saver</string>
+    <string name="theme_default">Systemstandard</string>
+    <string name="translation_screen_options">Optionen</string>
+    <string name="show_switch_lang_button">Schaltfläche \"Sprache wechseln\" anzeigen</string>
 </resources>

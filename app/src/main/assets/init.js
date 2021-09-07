@@ -1,0 +1,15 @@
+$('button').css('-webkit-tap-highlight-color','rgba(0, 0, 0, 0)');
+$('#dl_translator').siblings().hide();
+$('.dl_header_menu_v2__buttons__menu').hide();
+$('.dl_header_menu_v2__buttons__item').hide();
+$('.dl_header_menu_v2__links').children().not('#dl_menu_translator_simplified').hide();
+$('.dl_header_menu_v2__separator').hide();
+$('.lmt__bottom_text--mobile').hide();
+$('.lmt__formalitySwitch__smaller__select_toggler').hide();
+$('#dl_cookieBanner').hide();
+$('.lmt__language_container_sec').hide();
+$('.lmt__target_toolbar__save').hide();
+$('.lmt__rating').hide();
+$('footer').hide();
+$('a').css('pointer-events','none');
+$('.lmt__sides_container').css('margin-bottom','32px');

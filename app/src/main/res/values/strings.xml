@@ -9,4 +9,17 @@
     <string name="show">Show</string>
     <string name="update_available">is available!</string>
     <string name="url_app_home_page" translatable="false">https://github.com/jamal2362/Deepl-Translator/releases/latest</string>
+	
+	<string name="title_activity_settings">Settings</string>
+    <string name="themeSettings">General</string>
+    <string name="theme">Theme</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_battery">Set by Battery Saver</string>
+    <string name="theme_default">Follow System</string>
+    <string name="translation_screen_options">Options</string>
+    <string name="show_switch_lang_button">Show switch language button</string>
+
+    <string name="key_dark_mode" translatable="false">defaultDarkMode</string>
+    <string name="key_switch_lang_button" translatable="false">isEnabledSwapLangButton</string>
 </resources>

@@ -1,19 +1,28 @@
 package com.jamal2367.deepl
 
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import android.util.Log
 import android.view.View
+import android.view.animation.AlphaAnimation
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ImageButton
+import android.widget.Toast
+import androidx.webkit.WebSettingsCompat
+import androidx.webkit.WebViewFeature
 import com.google.android.material.snackbar.Snackbar
 
-
-class MyWebViewClient(private val activity: MainActivity, private val webView: WebView) : WebViewClient() {
+class MyWebViewClient(
+    private val activity: MainActivity,
+) : WebViewClient() {
+    private var isSplashFadeDone: Boolean = false
     private var param: String = "#en/en/"
+
     val urlParam: String get() = param
 
     override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
@@ -23,40 +32,52 @@ class MyWebViewClient(private val activity: MainActivity, private val webView: W
     }
 
     override fun onPageFinished(view: WebView, url: String) {
-        view.loadUrl(
-            "javascript:" +
-                    """
-                        $('button').css('-webkit-tap-highlight-color','rgba(0, 0, 0, 0)');
-                        $('#dl_translator').siblings().hide();
-                        $('.dl_header_menu_v2__buttons__menu').hide();
-                        $('.dl_header_menu_v2__buttons__item').hide();
-                        $('.dl_header_menu_v2__links').children().not('#dl_menu_translator_simplified').hide();
-                        $('.dl_header_menu_v2__separator').hide();
-                        $('.lmt__bottom_text--mobile').hide();
-                        $('.lmt__formalitySwitch__smaller__select_toggler').hide();
-                        $('#dl_cookieBanner').hide();
-                        $('.lmt__language_container_sec').hide();
-                        $('.lmt__target_toolbar__save').hide();
-                        $('.lmt__rating').hide();
-                        $('footer').hide();
-                        $('a').css('pointer-events','none');
-                        $('.lmt__sides_container').css('margin-bottom','32px');
-                        $('.lmt__translations_as_text__copy_button, .lmt__target_toolbar__copy').on('click',function() {
-                            const text = $('.lmt__translations_as_text__text_btn').eq(0).text();
-                            Android.copyClipboard(text);
-                        });
-                    """
-        )
-        webView.alpha = 1.0F
-        Regex("""#(.+?)/(.+?)/""").find(webView.url!!)?.let { param = it.value }
+        view.loadJavaScript("init.js")
+        view.loadJavaScript("patch-clipboard.js")
+
+        val config = view.context.getSharedPreferences("config", Context.MODE_PRIVATE)
+        val isEnabledSwapLanguageButton =
+            config.getBoolean(
+                view.context.getString(R.string.key_switch_lang_button),
+                true
+            )
+        if (isEnabledSwapLanguageButton) {
+            view.loadJavaScript("patch-switchLanguage.js")
+        }
+
+        if (!isSplashFadeDone) {
+            isSplashFadeDone = true
+            val animation = AlphaAnimation(0.0F, 1.0F)
+            animation.duration = 100
+            view.startAnimation(animation)
+        }
+        view.alpha = 1.0F
+
+        val nightMode =
+            (view.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+        if (nightMode) {
+            if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
+                WebSettingsCompat.setForceDark(view.settings, WebSettingsCompat.FORCE_DARK_ON)
+                view.loadJavaScript("patch-darkThemeFix.js")
+            } else {
+                Toast.makeText(activity, "Dark mode cannot be used because FORCE_DARK is not supported", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        Regex("#(.+?)/(.+?)/").find(view.url ?: "")?.let { param = it.value }
     }
 
-    override fun onReceivedError(view: WebView?, request: WebResourceRequest, error: WebResourceError?) {
+    override fun onReceivedError(
+        view: WebView?,
+        request: WebResourceRequest,
+        error: WebResourceError?
+    ) {
         if (request.isForMainFrame) {
             activity.setContentView(R.layout.error_page)
             val button: ImageButton = activity.findViewById(R.id.reload)
             val listener = ReloadButtonListener()
             button.setOnClickListener(listener)
+
             val errorDescription = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) error?.description.toString() else ""
             Snackbar.make(activity.findViewById(R.id.errText), errorDescription, Snackbar.LENGTH_LONG).show()
             Log.e("onReceivedError", errorDescription)
@@ -72,4 +93,11 @@ class MyWebViewClient(private val activity: MainActivity, private val webView: W
         }
     }
 
+    private fun getAssetsText(context: Context, fileName: String): String {
+        return context.assets.open(fileName).reader(Charsets.UTF_8).use { it.readText() }
+    }
+
+    private fun WebView.loadJavaScript(fileName: String) {
+        this.loadUrl("javascript:${getAssetsText(this.context, fileName)}")
+    }
 }
