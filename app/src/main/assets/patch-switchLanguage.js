@@ -6,5 +6,5 @@ if (!$('#lang_switch').length) {
             '#' + document.getElementsByClassName('lmt__language_select lmt__language_select--target')[0].getAttribute('dl-selected-lang').split('-')[0] +
             '/' + document.getElementsByClassName('lmt__language_select lmt__language_select--source')[0].getAttribute('dl-selected-lang').split('-')[0] +
             '/' + encodeURI(document.getElementsByClassName('lmt__textarea lmt__target_textarea lmt__textarea_base_style')[0].value);
-    }).prependTo($('.lmt__language_container')[1]);
+    }).appendTo($('.lmt__language_container')[1]);
 }
