@@ -8,4 +8,3 @@ $('.lmt--web .lmt__translations_as_text').css('border-radius', '8px');
 $('#lang_switch').css('background-color', '#212121');
 $('#lang_switch').css('border-radius', '8px');
 $('.dl_translator_page_container').css('background-color', '#121212');
-$('.dl_body--redesign .dl_top_element--wide').css('background-color', '#121212');
