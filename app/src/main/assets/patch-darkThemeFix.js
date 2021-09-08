@@ -1,2 +1,11 @@
 $('.dl_header_menu_v2__logo__img').attr('src','data:image/svg+xml;base64,' + Android.stringToBase64String(Android.getAssetsText('DeepL_Logo_lightBlue_v2.svg')));
 $('.dl_logo_text').attr('src','data:image/svg+xml;base64,' + Android.stringToBase64String(Android.getAssetsText('DeepL_Text_light.svg')));
+$('.dl_header').css('border-bottom', '0px');
+$('.lmt--web .lmt__side_container.lmt__side_container--source .lmt__textarea_container').css('background-color', '#212121');
+$('.lmt--web .lmt__side_container.lmt__side_container--source .lmt__textarea_container').css('border-radius', '8px');
+$('.lmt--web .lmt__translations_as_text').css('background-color', '#212121');
+$('.lmt--web .lmt__translations_as_text').css('border-radius', '8px');
+$('#lang_switch').css('background-color', '#212121');
+$('#lang_switch').css('border-radius', '8px');
+$('.dl_translator_page_container').css('background-color', '#121212');
+$('.dl_body--redesign .dl_top_element--wide').css('background-color', '#121212');

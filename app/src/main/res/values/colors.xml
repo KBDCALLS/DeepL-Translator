@@ -3,6 +3,6 @@
     <color name="colorAccent">#204060</color>
     <color name="light_grey">#F7F7F7</color>
     <color name="action_bar">#121212</color>
-    <color name="navigation_bar">#212121</color>
+    <color name="navigation_bar">#121212</color>
 	<color name="preferenceScreenAccent">@color/colorAccent</color>
 </resources>
