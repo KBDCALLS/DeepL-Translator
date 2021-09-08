@@ -7,7 +7,8 @@
             app:entryValues="@array/darkThemeValue"
             app:key="@string/key_dark_mode"
             app:title="@string/theme"
-            app:useSimpleSummaryProvider="true" />
+            app:useSimpleSummaryProvider="true"
+            app:icon="@drawable/ic_brush" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -15,7 +16,8 @@
 
         <SwitchPreference
             app:key="@string/key_switch_lang_button"
-            app:title="@string/show_switch_lang_button" />
+            app:title="@string/show_switch_lang_button"
+            app:icon="@drawable/ic_switch" />
     </PreferenceCategory>
 
 </PreferenceScreen>
